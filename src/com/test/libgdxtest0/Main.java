@@ -6,6 +6,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -29,19 +30,21 @@ public class Main implements ApplicationListener {
 	@Override
 	public void create() {
 		batch = new SpriteBatch(); // 实例化
-		mStage = new StageTest(400, 800, false);
+		batch.setColor(1, 1, 1, 0);
+		mStage = new StageTest(400, 800, false, batch);
+		//这样创建的Actor在Activity焦点的失去又获得后总会失去其texture,最好能放进Stage里
 		mStage.addActor(new Player());
 		// mStage.addActor(new Player2());
-		
+
 		InputAdapterTest inputProcessor = new InputAdapterTest();
-//		Gdx.input.setInputProcessor(inputProcessor);
-		//@1
+		// Gdx.input.setInputProcessor(inputProcessor);
+		// @1
 		Gdx.input.setInputProcessor(mStage);
-	
-		//@2
-//		InputMultiplexer imp = new InputMultiplexer();
-//		imp.addProcessor(mStage);
-//		Gdx.input.setInputProcessor(imp);
+
+		// @2
+		// InputMultiplexer imp = new InputMultiplexer();
+		// imp.addProcessor(mStage);
+		// Gdx.input.setInputProcessor(imp);
 	}
 
 	@Override
@@ -54,7 +57,7 @@ public class Main implements ApplicationListener {
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		Gdx.app.log("Main","here is Main method pause");
+		Gdx.app.log("Main", "here is Main method pause");
 	}
 
 	@Override
@@ -71,6 +74,7 @@ public class Main implements ApplicationListener {
 		/**
 		 * Test_02 Stage
 		 */
+
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		mStage.act(Gdx.graphics.getDeltaTime());
 		mStage.draw();
@@ -86,8 +90,7 @@ public class Main implements ApplicationListener {
 		// TODO Auto-generated method stub
 	}
 
-	
-	//自定义Actor,继承Actor
+	// 自定义Actor,继承Actor
 	public class Player extends Actor {
 
 		private Pixmap mPixmap;
@@ -98,9 +101,9 @@ public class Main implements ApplicationListener {
 		private float timer;
 
 		public Player() {
-			//#利用Pixmap初始化图片时，手机端关屏调用pause()后，会清空掉图片，变成白色
-			//#可以直接利用new Texture(Gdx.files.internal("root.png"))
-			mPixmap = new Pixmap(Gdx.files.internal("root.png"));
+			// #利用Pixmap初始化图片时，手机端关屏调用pause()后，会清空掉图片，变成白色
+			// #可以直接利用new Texture(Gdx.files.internal("root.png"))
+			mPixmap = new Pixmap(Gdx.files.internal("items.png"));
 			mTexture = new Texture(mPixmap);
 			mTextureRegion = new TextureRegion(mTexture, 40, 300, 200, 300);
 			Log.i("GETU", "msg" + mTextureRegion.getV() + "   "
@@ -110,8 +113,8 @@ public class Main implements ApplicationListener {
 			Gdx.app.log("form Player",
 					"width: " + mTextureRegion.getRegionWidth() + " "
 							+ mTextureRegion.getRegionHeight());
-//			setWidth(mTextureRegion.getRegionWidth());
-//			setHeight(mTextureRegion.getRegionHeight());
+			// setWidth(mTextureRegion.getRegionWidth());
+			// setHeight(mTextureRegion.getRegionHeight());
 		}
 
 		@Override
@@ -128,7 +131,7 @@ public class Main implements ApplicationListener {
 
 		@Override
 		public Actor hit(float x, float y, boolean touchable) {
-			Gdx.app.log("Player", "here is player method hit");
+			// Gdx.app.log("Player", "here is player method hit");
 			return super.hit(x, y, touchable);
 		}
 
@@ -159,10 +162,10 @@ public class Main implements ApplicationListener {
 			// mSprite.setRotation(0);
 			// }
 			// Gdx.app.log("Player", "here is player method draw");
-//			mSprite.draw(batch);
-			if(mSprite != null && mSprite.getTexture() != null){
+			// mSprite.draw(batch);
+			if (mSprite != null && mSprite.getTexture() != null) {
 				batch.draw(mTextureRegion, 20, 20);
-				Gdx.app.log("Player", "here is Palyer method draw()");
+				// Gdx.app.log("Player", "here is Palyer method draw()");
 			}
 		}
 

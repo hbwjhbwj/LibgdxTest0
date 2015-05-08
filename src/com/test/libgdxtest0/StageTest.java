@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -21,8 +22,8 @@ public class StageTest extends Stage {
 		super.act(arg0);
 	}
 
-	public StageTest(float arg0, float arg1, boolean arg2) {
-		super(arg0, arg1, arg2);
+	public StageTest(float arg0, float arg1, boolean arg2,SpriteBatch spritbatch) {
+		super(arg0, arg1, arg2,spritbatch);
 		
 		
 		
@@ -30,7 +31,7 @@ public class StageTest extends Stage {
 				new TextureRegion(
 						new Texture(Gdx.files.internal("root.png")),0,0,50,50));
 		Gdx.app.log("Gdx.graphics", "Width is " + Gdx.graphics.getWidth());
-		imageButton.setPosition(Gdx.graphics.getWidth()/4,Gdx.graphics.getHeight()/2);
+		imageButton.setPosition(0,100);
 		this.addActor(imageButton);
 		boolean isAdd = imageButton.addListener(new MyActorListener());
 		Gdx.app.log("StageTest","here is isAdd" + isAdd);
