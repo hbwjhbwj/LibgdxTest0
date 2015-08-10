@@ -2,6 +2,7 @@ package com.test.libgdxtest0;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.example.libgdxtest.R;
@@ -105,7 +107,10 @@ public class HelloLibgdxActivity extends AndroidApplication {
 			wparam.x = 0;
 			wparam.y = 0;
 			wparam.width = 720 - 16 * 2;
-			wparam.height = 300;
+//			wparam.height = 300;
+			Point p = new Point();
+			getWindowManager().getDefaultDisplay().getSize(p);
+			wparam.height = p.y/2;
 			GLsfv = (GLSurfaceView) initializeForView(new Main(), cfg);
 			GLsfv.getHolder().setFormat(PixelFormat.RGBA_8888);
 			mWindowManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);

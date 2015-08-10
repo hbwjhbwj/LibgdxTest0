@@ -33,7 +33,8 @@ public class Main implements ApplicationListener {
 		batch.setColor(1, 1, 1, 0);
 		mStage = new StageTest(400, 800, false, batch);
 		//这样创建的Actor在Activity焦点的失去又获得后总会失去其texture,最好能放进Stage里
-		mStage.addActor(new Player());
+//		mStage.addActor(new Player());
+		mStage.addActor(new PixmapActor());
 		// mStage.addActor(new Player2());
 
 		InputAdapterTest inputProcessor = new InputAdapterTest();

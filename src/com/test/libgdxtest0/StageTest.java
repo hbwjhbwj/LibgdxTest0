@@ -29,9 +29,13 @@ public class StageTest extends Stage {
 		
 		imageButton = new Image(
 				new TextureRegion(
-						new Texture(Gdx.files.internal("root.png")),0,0,50,50));
+						new Texture(Gdx.files.internal("root.png")),
+						0,
+						0,
+						100,
+						100));
 		Gdx.app.log("Gdx.graphics", "Width is " + Gdx.graphics.getWidth());
-		imageButton.setPosition(0,100);
+		imageButton.setPosition(0,0);
 		this.addActor(imageButton);
 		boolean isAdd = imageButton.addListener(new MyActorListener());
 		Gdx.app.log("StageTest","here is isAdd" + isAdd);
